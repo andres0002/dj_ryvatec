@@ -24,10 +24,12 @@ class Usuario(models.Model):
     direccion = models.CharField(max_length=60)
     correo = models.EmailField(max_length=150, blank=True, null=True)
     pagina = models.CharField(max_length=150)
-    imagen = models.ImageField(upload_to='usuarios', default='usuarios/ironman.jpg')
+    imagen = models.ImageField(upload_to='usuarios/', default='usuarios/ironman.jpg')
     especialidad = models.CharField(max_length=100)
     usuid = models.OneToOneField(User, on_delete=models.CASCADE)
     rol = models.CharField(max_length=20, choices=ROL_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):  # __unicode__
         return self.nombre
@@ -40,6 +42,8 @@ class Categoria(models.Model):
     '''Esta clase se encarga de definir los actributos de la tabla Categoria de la base de datos ryvatec.'''
     id_categoria = models.CharField(primary_key=10, max_length=10)
     nombre = models.CharField(max_length=30)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):  # __unicode__
         return self.nombre
@@ -55,8 +59,10 @@ class Dispositivo(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=30)
     precio = models.IntegerField()
-    imagen = models.ImageField(upload_to='dispositivos')
+    imagen = models.ImageField(upload_to='dispositivos/')
     descripcion = models.CharField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):  # __unicode__
         return self.nombre
